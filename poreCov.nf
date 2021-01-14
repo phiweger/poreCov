@@ -99,6 +99,13 @@ if ( params.primerV.matches('V1200') ) { v1200_MSG() }
         .map { file -> tuple(file.name, file) }
     }
 
+// list (csv) input
+    if (params.list) { fastq_input_ch = Channel
+        .fromPath( params.list, checkIfExists: true)
+        .splitCsv(header: false)
+        .map { row -> tuple(row[0], row[1]) }
+
+
 /************************** 
 * DATABASES
 **************************/
