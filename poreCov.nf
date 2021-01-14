@@ -258,7 +258,7 @@ workflow {
 
 // 1. reconstruct genomes
     if (params.dir) { artic_nCov19_wf(basecalling_wf(dir_input_ch)); fasta_input_ch = artic_nCov19_wf.out }
-    if (params.fastq) { artic_nCov19_wf(fastq_input_ch); fasta_input_ch = artic_nCov19_wf.out}
+    if (params.fastq || params.list) { artic_nCov19_wf(fastq_input_ch); fasta_input_ch = artic_nCov19_wf.out}
 
 // 2. analyse genomes to references and build tree
     if (params.references && params.metadata && (params.fastq || params.fasta || params.dir)) {
@@ -284,10 +284,10 @@ workflow {
     if (params.metadata) { toytree_wf(newick) }
 
 // 4. determine lineage
-    if (params.fastq || params.fasta || params.dir) {
-        determine_lineage_wf(fasta_input_ch)
+    // if (params.fastq || params.fasta || params.dir) {
+    //     determine_lineage_wf(fasta_input_ch)
 
-    }
+    // }
 }
 
 /*************  
