@@ -61,11 +61,11 @@ if ( params.primerV.matches('V1200') ) { v1200_MSG() }
     }
 
 // params help
-    if (!params.fasta &&  !params.dir &&  !params.fastq ) {
-        exit 1, "input missing, use [--fasta] [--fastq] or [--dir]"}
-    if ((params.fasta && ( params.fastq || params.dir )) || ( params.fastq && params.dir )) {
-        exit 1, "To much inputs: please us either: [--fasta], [--fastq] or [--dir]"} 
-    if (!params.metadata) { println "\033[0;33mNo [--metadata] file specified, skipping tree build\u001B[0m" }
+    // if (!params.fasta &&  !params.dir &&  !params.fastq ) {
+    //     exit 1, "input missing, use [--fasta] [--fastq] or [--dir]"}
+    // if ((params.fasta && ( params.fastq || params.dir )) || ( params.fastq && params.dir )) {
+    //     exit 1, "To much inputs: please us either: [--fasta], [--fastq] or [--dir]"} 
+    // if (!params.metadata) { println "\033[0;33mNo [--metadata] file specified, skipping tree build\u001B[0m" }
 
 /************************** 
 * INPUTs
@@ -104,6 +104,7 @@ if ( params.primerV.matches('V1200') ) { v1200_MSG() }
         .fromPath( params.list, checkIfExists: true)
         .splitCsv(header: false)
         .map { row -> tuple(row[0], row[1]) }
+    }
 
 
 /************************** 
@@ -284,10 +285,10 @@ workflow {
     if (params.metadata) { toytree_wf(newick) }
 
 // 4. determine lineage
-    // if (params.fastq || params.fasta || params.dir) {
-    //     determine_lineage_wf(fasta_input_ch)
+    if (params.fastq || params.fasta || params.dir) {
+        determine_lineage_wf(fasta_input_ch)
 
-    // }
+    }
 }
 
 /*************  
