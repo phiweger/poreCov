@@ -37,28 +37,28 @@ if (params.help) { exit 0, helpMSG() }
 if ( params.primerV.matches('V1200') ) { v1200_MSG() }
 
 // profile helps
-    if ( workflow.profile == 'standard' ) { exit 1, "NO EXECUTION PROFILE SELECTED, use e.g. [-profile local,docker]" }
-    if (params.profile) { exit 1, "--profile is WRONG use -profile" }
-    if (
-        workflow.profile.contains('singularity') ||
-        workflow.profile.contains('docker')
-        ) { "engine selected" }
-    else { println "No engine selected:  -profile EXECUTER,ENGINE" 
-           println "using native installations" }
-    if (
-        workflow.profile.contains('local')
-        ) { "executer selected" }
-    else { exit 1, "No executer selected:  -profile EXECUTER,ENGINE" }
+    // if ( workflow.profile == 'standard' ) { exit 1, "NO EXECUTION PROFILE SELECTED, use e.g. [-profile local,docker]" }
+    // if (params.profile) { exit 1, "--profile is WRONG use -profile" }
+    // if (
+    //     workflow.profile.contains('singularity') ||
+    //     workflow.profile.contains('docker')
+    //     ) { "engine selected" }
+    // else { println "No engine selected:  -profile EXECUTER,ENGINE" 
+    //        println "using native installations" }
+    // if (
+    //     workflow.profile.contains('local')
+    //     ) { "executer selected" }
+    // else { exit 1, "No executer selected:  -profile EXECUTER,ENGINE" }
 
-    if (workflow.profile.contains('local')) {
-        println "\033[2mCPUs to use: $params.cores, maximal CPUs to use: $params.max_cores\u001B[0m"
-        println " "
-    }
-    if ( workflow.profile.contains('singularity') ) {
-        println ""
-        println "\033[0;33mWARNING: Singularity image building sometimes fails!"
-        println "Multiple resumes (-resume) and --max_cores 1 --cores 1 for local execution might help.\033[0m\n"
-    }
+    // if (workflow.profile.contains('local')) {
+    //     println "\033[2mCPUs to use: $params.cores, maximal CPUs to use: $params.max_cores\u001B[0m"
+    //     println " "
+    // }
+    // if ( workflow.profile.contains('singularity') ) {
+    //     println ""
+    //     println "\033[0;33mWARNING: Singularity image building sometimes fails!"
+    //     println "Multiple resumes (-resume) and --max_cores 1 --cores 1 for local execution might help.\033[0m\n"
+    // }
 
 // params help
     // if (!params.fasta &&  !params.dir &&  !params.fastq ) {
