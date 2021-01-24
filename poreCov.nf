@@ -124,7 +124,7 @@ if (!workflow.profile.contains('test_fastq') && !workflow.profile.contains('test
     }
     else if (params.fastq_raw && !workflow.profile.contains('test_fastq')) { 
         fastq_dir_ch = Channel
-        .fromPath( params.fastq_raw, checkIfExists: true, type: 'dir')
+        .fromPath( params.fastq_raw, type: 'dir')
         .map { file -> tuple(file.simpleName, file) }
     }
 
